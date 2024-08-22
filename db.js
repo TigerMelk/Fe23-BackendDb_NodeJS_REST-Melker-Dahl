@@ -1,4 +1,4 @@
-import mysql from "mysq12/promise.js";
+const mysql = require("mysql2");
 
 // Create a pool of database connections
 const pool = mysql.createPool({
