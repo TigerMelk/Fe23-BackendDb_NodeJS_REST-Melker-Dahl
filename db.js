@@ -12,4 +12,15 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-export default pool;
+module.exports = {
+  query: (sql, values) => {
+    return new Promise((resolve, reject) => {
+      pool.query(sql, values, (err, results) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(results);
+      });
+    });
+  },
+};

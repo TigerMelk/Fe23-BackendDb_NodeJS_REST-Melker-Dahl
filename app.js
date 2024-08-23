@@ -1,6 +1,14 @@
-import express from "exporess";
-import ejs from "ejs";
-import pool from "./db.js";
-import bodyParser from "body-parser";
+const express = require("express");
+const ejs = require("ejs");
+const db = require("./db.js");
+const bodyParser = require("body-parser");
 
 const app = express();
+
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
