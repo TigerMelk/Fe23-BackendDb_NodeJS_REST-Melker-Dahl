@@ -10,14 +10,48 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-	res.render("index");
+  res.render("index");
 });
+// all students
 app.get("/students", async (req, res) => {
-	let sql = "SELECT * FROM students";
-	const dbData = await db.query(sql);
-	console.dir(dbData);
-	res.render("students", { dbData });
+  let sql = "SELECT * FROM students";
+  const dbData = await db.query(sql);
+  console.dir(dbData);
+  res.render("students", { dbData });
+});
+
+// town
+app.get("/students/town/:townName", async (req, res) => {
+  const townName = req.params.townName;
+  let sql = "SELECT * FROM students WHERE town =?";
+  const dbData = await db.query(sql, [townName]);
+  console.dir(dbData);
+  res.render("students", { dbData });
+});
+
+// student-details
+app.get("/students/:studentId", async (req, res) => {
+  const studentId = req.params.studentId;
+  let sql = `
+	SELECT students.fName, students.lName, courses.name as courseName, courses.description 
+	FROM students
+	JOIN student_courses ON students.id = student_courses.student_id
+	JOIN courses ON student_courses.course_id = courses.id
+	WHERE students.id = ?`;
+
+  const studentData = await db.query(sql, [studentId]);
+
+  if (studentData.length > 0) {
+    const studentDetails = {
+      fName: studentData[0].fName,
+      lName: studentData[0].lName,
+    };
+    res.render("student-details", {
+      student: studentDetails,
+      courses: studentData,
+    });
+  }
 });
 app.listen(3000, () => {
-	console.log("Server is running on port 3000");
+  console.log("Server is running on port 3000");
 });

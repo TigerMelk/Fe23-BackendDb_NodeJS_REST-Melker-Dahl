@@ -10,9 +10,11 @@
   <tbody>
     <% dbData.forEach(student => { %>
     <tr>
-      <td><%= student.fName %></td>
+      <td><a href="/students/<%= student.id %>"><%= student.fName %></a></td>
       <td><%= student.lName %></td>
-      <td><%= student.town %></td>
+      <td>
+        <a href="/students/town/<%= student.town %>"><%= student.town %></a>
+      </td>
     </tr>
     <% }) %>
   </tbody>

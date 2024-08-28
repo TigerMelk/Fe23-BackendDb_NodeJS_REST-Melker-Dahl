@@ -1,0 +1,13 @@
+<%- include('partials/head') %>
+<body>
+  <h1>Student <%= student.fName %> <%= student.lName %> and their courses</h1>
+  <% if (courses.length > 0){ %>
+  <ul>
+    <% courses.forEach(course => { %>
+    <li><%= course.courseName %>: <%= course.description %></li>
+    <% }) %>
+  </ul>
+  <% } else { %>
+  <p>student has no courses.</p>
+  <% }%>
+</body>
