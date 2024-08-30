@@ -1,0 +1,13 @@
+<%- include('partials/head.ejs') %>
+<body>
+    <% if (typeof dbData != 'undefined' && dbData.length > 0) { %>
+        <ul>
+            <% dbData.forEach(course => { %> 
+            <li><a href="/courses/<%= course.id %>"><%= course.name %></a></li>
+           <% }) %>
+        </ul>
+        <% } else { %>
+            <p>no courses found</p>
+            <% } %>
+</body>
+</html>

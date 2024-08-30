@@ -1,6 +1,30 @@
 <%- include('partials/head.ejs') %>
 <body>
     <h1>student list</h1>
-    <%- include('partials/dataTable.ejs') %>
+    <% if (typeof dbData != 'undefined' && dbData.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Town</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% dbData.forEach(student => { %>
+            <tr>
+              <td><a href="/students/<%= student.id %>"><%= student.fName %></a></td>
+              <td><a href="/students/<%= student.id %>"><%= student.lName %></a></td>
+              <td>
+                <a href="/students/town/<%= student.town %>"><%= student.town %></a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } else { %>
+        <p>No students found.</p>
+        <% } %>
+        
 </body>
 </html>

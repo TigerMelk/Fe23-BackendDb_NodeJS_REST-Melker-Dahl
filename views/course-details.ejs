@@ -1,0 +1,32 @@
+<%- include('partials/head') %>
+<body>
+  <h1><%= course.name %></h1>
+  <p><%= course.description %></p>
+
+  <% if (course.students.length > 0) { %>
+  <h2>Enrolled Students</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% course.students.forEach(student => { %>
+      <tr>
+        <td>
+          <a href="/students/<%= student.id %>"><%= student.firstName %></a>
+        </td>
+        <td>
+          <a href="/students/<%= student.id %>"><%= student.lastName %></a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } else { %>
+  <p>No students are currently enrolled in this course.</p>
+  <% } %>
+</body>
+</html>

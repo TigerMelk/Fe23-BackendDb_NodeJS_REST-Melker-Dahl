@@ -52,6 +52,40 @@ app.get("/students/:studentId", async (req, res) => {
     });
   }
 });
+
+app.get("/courses", async (req, res) => {
+  let sql = "SELECT * FROM courses";
+  const dbData = await db.query(sql);
+  console.dir(dbData);
+  res.render("courses", { dbData });
+});
+
+app.get("/courses/:courseId", async (req, res) => {
+  const courseId = req.params.courseId;
+  let sql = `SELECT courses.name AS courseName, 
+					  courses.description AS courseDescription, 
+					  students.id AS studentId, 
+					  students.fName AS studentFName, 
+					  students.lName AS studentLName
+			   FROM courses 
+			   LEFT JOIN student_courses ON courses.id = student_courses.course_id
+			   LEFT JOIN students ON student_courses.student_id = students.id 
+			   WHERE courses.id = ?`;
+
+  const dbData = await db.query(sql, [courseId]);
+
+  const courseDetails = {
+    name: dbData[0].courseName,
+    description: dbData[0].courseDescription,
+    students: dbData.map((student) => ({
+      id: student.studentId,
+      firstName: student.studentFName,
+      lastName: student.studentLName,
+    })),
+  };
+  res.render("course-details", { course: courseDetails });
+});
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
