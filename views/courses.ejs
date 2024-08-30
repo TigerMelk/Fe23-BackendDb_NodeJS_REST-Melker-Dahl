@@ -1,5 +1,7 @@
 <%- include('partials/head.ejs') %>
 <body>
+  <%- include('partials/header')%>
+
     <% if (typeof dbData != 'undefined' && dbData.length > 0) { %>
         <ul>
             <% dbData.forEach(course => { %> 

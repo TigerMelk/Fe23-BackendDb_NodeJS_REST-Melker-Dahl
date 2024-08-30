@@ -1,0 +1,23 @@
+<%- include('partials/head.ejs') %>
+<body>
+  <%- include('partials/header')%>
+
+  <h1>Courses and Enrolled Students</h1>
+
+  <% courses.forEach(course=>{ %>
+    <h2><a href="/courses/<%= course.courseId %>"><%= course.courseName %></a></h2>
+    <% if (course.students.length > 0) {%>
+    <ul>
+        <% course.students.forEach(student => {%>
+        <li>
+            <a href="/students/<%= student.id %>"><%= student.firstName %> <%= student.lastName %></a>
+        </li>
+        <%})%>
+    </ul>
+    <% } else {%>
+    <p>No students enrolled yet</p>
+    <%}%>
+
+<%})%>
+</body>
+</html>
