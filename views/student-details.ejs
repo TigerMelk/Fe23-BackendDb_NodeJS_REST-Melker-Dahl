@@ -11,5 +11,15 @@
   </ul>
   <% } else { %>
   <p>student has no courses.</p>
+  <form action="/enrollStudent" method="POST">
+    <input type="hidden" name="studentId" value="<%= studentId %>" />
+    <label for="courseId">Select Course:</label>
+    <select name="courseId" id="courseId">
+      <% dbCourses.forEach(course => { %>
+      <option value="<%= course.id %>"><%= course.name %></option>
+      <%})%>
+    </select>
+    <button type="submit">Enroll</button>
+  </form>
   <% }%>
 </body>

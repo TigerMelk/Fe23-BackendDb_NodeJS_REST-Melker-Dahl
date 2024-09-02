@@ -1,7 +1,7 @@
 <%- include('partials/head.ejs') %>
 <body>
   <%- include('partials/header')%>
-
+<a href="/addStudent">Add a Student</a>
     <h1>student list</h1>
     <% if (typeof dbData != 'undefined' && dbData.length > 0) { %>
         <table>
@@ -19,6 +19,12 @@
               <td><a href="/students/<%= student.id %>"><%= student.lName %></a></td>
               <td>
                 <a href="/students/town/<%= student.town %>"><%= student.town %></a>
+              </td>
+              <td>
+                <form action="/deleteStudent" method="POST">
+                  <input type="hidden" name="studentId" value="<%= student.id %>">
+                  <button type="submit">Delete</button>
+                </form>
               </td>
             </tr>
             <% }) %>

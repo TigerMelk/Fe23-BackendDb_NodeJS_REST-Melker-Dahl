@@ -1,11 +1,17 @@
 <%- include('partials/head.ejs') %>
 <body>
   <%- include('partials/header')%>
-
+<a href="/addCourse">Add a new Course</a>
     <% if (typeof dbData != 'undefined' && dbData.length > 0) { %>
         <ul>
             <% dbData.forEach(course => { %> 
-            <li><a href="/courses/<%= course.id %>"><%= course.name %></a></li>
+            <li>
+              <a href="/courses/<%= course.id %>"><%= course.name %></a>
+              <form action="/deleteCourse" method="POST">
+                <input type="hidden" name="courseId" value="<%= course.id %>">
+                <button type="submit">Delete</button>
+              </form>
+            </li>
            <% }) %>
         </ul>
         <% } else { %>
