@@ -56,12 +56,60 @@ app.get("/students/:studentId", async (req, res) => {
   });
 });
 
+// part of fname
+app.get("/students/fname/:fname", async (req, res) => {
+  const fName = req.params.fname;
+  let sql = `SELECT * FROM students WHERE fName LIKE ?`;
+
+  const students = await db.query(sql, [`${fName}`]);
+  if (students.length > 0) {
+    res.render("students", { dbData: students });
+  } else {
+    res.send("no students found with that first name");
+  }
+});
+app.get("/students/lname/:lname", async (req, res) => {
+  const lName = req.params.lname;
+  let sql = `SELECT * FROM students WHERE lName LIKE ?`;
+
+  const students = await db.query(sql, [`${lName}`]);
+  if (students.length > 0) {
+    res.render("students", { dbData: students });
+  } else {
+    res.send("no students found with that last name");
+  }
+});
+
 // courses
 app.get("/courses", async (req, res) => {
   let sql = "SELECT * FROM courses";
   const dbData = await db.query(sql);
   console.dir(dbData);
   res.render("courses", { dbData });
+});
+// part of course name
+app.get("/courses/name/:partOfName", async (req, res) => {
+  const partOfName = req.params.partOfName;
+  let sql = `SELECT * FROM courses WHERE name LIKE ?`;
+  const courses = await db.query(sql, [`%${partOfName}%`]);
+  if (courses.length > 0) {
+    res.render("courses", { dbData: courses });
+  } else {
+    res.send(`No courses with name including "${partOfName}"`);
+  }
+});
+// part of description
+app.get("/courses/description/:partOfDescription", async (req, res) => {
+  const partOfDescription = req.params.partOfDescription;
+
+  let sql = `SELECT * FROM courses WHERE description LIKE ?`;
+  const courses = await db.query(sql, [`%${partOfDescription}%`]);
+
+  if (courses.length > 0) {
+    res.render("courses", { dbData: courses });
+  } else {
+    res.send(`no courses found with description with "${partOfDescription}"`);
+  }
 });
 
 // courses - details
@@ -194,7 +242,7 @@ app.post("/deleteStudent", async (req, res) => {
   res.redirect("/students");
 });
 
-// delete course
+// delete course and association
 app.post("/deleteCourse", async (req, res) => {
   const { courseId } = req.body;
 
