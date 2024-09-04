@@ -6,7 +6,9 @@
   <% if (courses.length > 0){ %>
   <ul>
     <% courses.forEach(course => { %>
-    <li><%= course.courseName %>: <%= course.description %></li>
+    <li>
+      <strong><%= course.courseName %>:</strong> <%= course.description %>
+    </li>
     <% }) %>
   </ul>
   <% } else { %>

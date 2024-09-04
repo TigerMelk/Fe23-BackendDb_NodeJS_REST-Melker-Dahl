@@ -2,7 +2,7 @@
 <body>
   <%- include('partials/header')%>
 
-  <h1>Courses and Enrolled Students</h1>
+  <h1><u>Courses and Enrolled Students</u></h1>
 
   <% courses.forEach(course=>{ %>
     <h2><a href="/courses/<%= course.courseId %>"><%= course.courseName %></a></h2>

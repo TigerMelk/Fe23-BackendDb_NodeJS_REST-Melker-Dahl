@@ -1,0 +1,57 @@
+* {
+  margin: 20px auto;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(220, 241, 255);
+}
+a {
+  color: black;
+  margin: 0 auto;
+  max-width: 300px;
+  text-decoration: none;
+}
+a:hover {
+  opacity: 70%;
+}
+
+form {
+  display: flex;
+  flex-flow: column wrap;
+}
+form > input {
+  width: 80%;
+}
+div {
+  max-width: 400px;
+}
+
+button {
+  max-width: 200px;
+}
+p {
+  max-width: 500px;
+}
+h1 {
+  margin: 0 auto;
+  max-width: 500px;
+}
+h2 {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.navbar {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+ul {
+  background-color: rgb(220, 241, 255);
+  list-style-type: none;
+}
+li {
+  background-color: rgb(253, 239, 234);
+  padding: 20px;
+  border-radius: 2vh;
+}
