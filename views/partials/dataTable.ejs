@@ -1,0 +1,14 @@
+<% if(typeof dbData != 'undefined'){%>
+
+<table border="1" class="table">
+  <% Object.keys(dbData[0]).forEach( header => {%>
+  <th><%= header; %></th>
+  <% }); %> <% dbData.forEach( row => {%>
+  <tr>
+    <% Object.values(row).forEach( value => {%>
+    <td><%= value; %></td>
+    <% }); %>
+  </tr>
+  <% }); %>
+</table>
+<% } %>
